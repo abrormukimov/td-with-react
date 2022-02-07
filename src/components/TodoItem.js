@@ -1,4 +1,5 @@
 import React from 'react'
+import Swal from 'sweetalert2'
 import styles from "./TodoItem.module.css"
 
 class TodoItem extends React.Component {
@@ -18,6 +19,12 @@ class TodoItem extends React.Component {
         editing: false
       })
     }
+  }
+
+  componentWillUnmount() {
+    Swal.fire(
+      'You have successfully deleted your todo'
+    )
   }
 
   render() {

@@ -1,4 +1,5 @@
 import React from 'react'
+import Swal from 'sweetalert2'
 import { v4 as uuidv4 } from 'uuid'
 import Header from './Header'
 import InputTodo from './InputTodo';
@@ -74,6 +75,25 @@ class TodoContainer extends React.Component {
         return todo
       })
     })
+  }
+
+  componentDidMount() {
+    // fetch('https://jsonplaceholder.typicode.com/todos?_limit=10"')
+    //   .then(response => response.json())
+    //   .then(data => this.setState({todos: data}))
+    const newTodos = JSON.parse(localStorage.getItem('todos'))
+    if (newTodos) {
+      this.setState({
+        todos: newTodos
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.todos !== this.state.todos) {
+      const temp = JSON.stringify(this.state.todos)
+      localStorage.setItem('todos', temp)
+    }
   }
 
   render() {
